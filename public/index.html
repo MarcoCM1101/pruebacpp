@@ -47,6 +47,21 @@
           ccpSynTimeout: 3000, //optional, defaults to 1000 (ms)
           ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
         });
+
+        connect.contact(function (contact) {
+          contact.onConnected(async function (contact) {
+            cid = contact.getContactId();
+            setCallId(cid);
+            var attributeMap = contact.getAttributes();
+            console.log(attributeMap);
+            auth = JSON.stringify(attributeMap["boolAuth"]["value"]);
+            props.onChangeAuth(auth);
+            console.log(auth);
+            clientId = JSON.stringify(attributeMap["clientId"]["value"]);
+            props.onChangeClientId(clientId);
+            console.log(clientId);
+          });
+        });
       }
     </script>
   </body>
