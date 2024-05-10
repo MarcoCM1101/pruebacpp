@@ -6,16 +6,12 @@
     <!-- Cargar el script de Amazon Connect Streams -->
     <script
       src="https://amazon-connect.github.io/connect-streams/release/connect-streams-min.js"
-      onload="scriptLoaded()"
+      onload="init()"
     ></script>
   </head>
   <body bgcolor="black">
     <div id="container-div" style="width: 400px; height: 500px"></div>
     <script type="text/javascript">
-      function scriptLoaded() {
-        init(); // Llamar a init solo después de que el script se haya cargado
-      }
-
       function init() {
         var containerDiv = document.getElementById("container-div");
         var instanceURL = "https://gnpconnect.my.connect.aws/ccp-v2/";
