@@ -14,7 +14,7 @@
     <div id="container-div" style="width: 400px; height: 500px"></div>
     <script type="text/javascript">
       var containerDiv = document.getElementById("container-div");
-      //URL de la instancia
+      // URL de la instancia
       var instanceURL = "https://gnpconnect.my.connect.aws/connect/ccp-v2/";
       // initialize the streams api
       function init() {
@@ -60,6 +60,13 @@
             clientId = JSON.stringify(attributeMap["clientId"]["value"]);
             props.onChangeClientId(clientId);
             console.log(clientId);
+
+            // Get and print the phone number
+            var phoneNumber = JSON.stringify(
+              attributeMap["phoneNumber"]["value"]
+            );
+            console.log("Phone Number:", phoneNumber);
+            alert("Phone Number: " + phoneNumber); // Display the phone number
           });
         });
       }
