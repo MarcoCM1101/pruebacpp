@@ -53,7 +53,14 @@
           var agentId = agent.getAgentId();
           console.log("Agent ID:", agentId);
 
-          // Otros atributos del agente si es necesario
+          // Obtén la configuración del agente
+          var configuration = agent.getConfiguration();
+          console.log("Agent Configuration:", configuration);
+
+          // Obtén el correo electrónico del agente
+          var agentEmail = configuration.configuration.metadata.email;
+          console.log("Agent Email:", agentEmail);
+          alert("Agent Email: " + agentEmail);
         });
 
         connect.contact(function (contact) {
