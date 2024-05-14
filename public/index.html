@@ -51,6 +51,16 @@
           var username = agent.getConfiguration().username;
           console.log("Agent Username:", username);
           alert("Agent Username: " + username);
+
+          var agentConfig = agent.getConfiguration();
+          console.log("Agent Configuration:", agentConfig);
+
+          // Imprime todos los campos de la configuración del agente
+          for (var key in agentConfig) {
+            if (agentConfig.hasOwnProperty(key)) {
+              console.log(key + ": ", agentConfig[key]);
+            }
+          }
         });
 
         connect.contact(function (contact) {
