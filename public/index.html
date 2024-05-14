@@ -50,13 +50,17 @@
 
         connect.contact(function (contact) {
           contact.onConnected(async function (contact) {
+            console.log("**********************************************");
+
             cid = contact.getContactId();
-            setCallId(cid);
+            console.log(cid);
+            //setCallId(cid);
             var attributeMap = contact.getAttributes();
-            console.log(attributeMap);
+            //console.log(attributeMap);
             auth = JSON.stringify(attributeMap["boolAuth"]["value"]);
             props.onChangeAuth(auth);
-            console.log(auth);
+            //console.log(auth);
+            console.log("**********************************************");
             clientId = JSON.stringify(attributeMap["clientId"]["value"]);
             props.onChangeClientId(clientId);
             console.log(clientId);
