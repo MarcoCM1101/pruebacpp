@@ -51,15 +51,6 @@
           var username = agent.getConfiguration().emailAddress;
           console.log("Agent Username:", username);
           alert("Agent Username: " + username);
-
-          var email =
-            agent.getConfiguration().routingProfile.defaultOutboundQueue.email;
-          if (email) {
-            console.log("Agent Email:", email);
-            alert("Agent Email: " + email);
-          } else {
-            console.log("Email address not found for the agent.");
-          }
         });
 
         connect.contact(function (contact) {
