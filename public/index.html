@@ -42,6 +42,20 @@
           ccpLoadTimeout: 10000,
         });
 
+        // Obtén los detalles del agente logueado
+        connect.agent(function (agent) {
+          // Obtén el nombre del agente
+          var agentName = agent.getName();
+          console.log("Agent Name:", agentName);
+          alert("Agent Name: " + agentName);
+
+          // Obtén el ID del agente
+          var agentId = agent.getAgentId();
+          console.log("Agent ID:", agentId);
+
+          // Otros atributos del agente si es necesario
+        });
+
         connect.contact(function (contact) {
           contact.onConnected(async function (contact) {
             console.log("**********************************************");
@@ -64,18 +78,6 @@
               alert("Phone Number: " + phoneNumber);
             } else {
               console.log("Phone number attribute not found.");
-            }
-
-            // Obtén y muestra el nombre del agente
-            if (
-              attributeMap["agentName"] &&
-              attributeMap["agentName"]["value"]
-            ) {
-              var agentName = attributeMap["agentName"]["value"];
-              console.log("Agent Name:", agentName);
-              alert("Agent Name: " + agentName);
-            } else {
-              console.log("Agent name attribute not found.");
             }
 
             console.log("**********************************************");
