@@ -45,12 +45,8 @@
         // Obtén los detalles del agente logueado
         connect.agent(function (agent) {
           // Obtén el nombre del agente
-          var agentName = agent.getName();
+          var agentName = agent.getLastName();
           console.log("Agent Name:", agentName);
-
-          // Obtén la configuración del agente
-          var configuration = agent.getConfiguration();
-          console.log("Agent Configuration:", configuration);
         });
 
         connect.contact(function (contact) {
