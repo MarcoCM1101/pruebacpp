@@ -42,52 +42,76 @@
           ccpLoadTimeout: 10000,
         });
 
+        var agentUsername = "";
+        var contactPhoneNumber = "";
+
+        function sendData() {
+          if (agentUsername && contactPhoneNumber) {
+            fetch("http://54.92.195.22:8080/connect/numero", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                agentName: agentUsername,
+                phoneNumber: contactPhoneNumber,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log("Success:", data);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
+        }
+
         // Obtén los detalles del agente logueado
         connect.agent(function (agent) {
-          // Obtén el nombre del agente
           var agentName = agent.getName();
           console.log("Agent Name:", agentName);
 
-          var username = agent.getConfiguration().username;
-          console.log("Agent Username:", username);
-          alert("Agent Username: " + username);
+          agentUsername = agent.getConfiguration().username;
+          console.log("Agent Username:", agentUsername);
+          alert("Agent Username: " + agentUsername);
 
           var agentConfig = agent.getConfiguration();
           console.log("Agent Configuration:", agentConfig);
 
-          // Imprime todos los campos de la configuración del agente
           for (var key in agentConfig) {
             if (agentConfig.hasOwnProperty(key)) {
               console.log(key + ": ", agentConfig[key]);
             }
           }
+
+          sendData(); // Intenta enviar datos después de obtener el username
         });
 
         connect.contact(function (contact) {
           contact.onConnected(async function (contact) {
             console.log("**********************************************");
 
-            // Obtén y muestra el ID del contacto
             var cid = contact.getContactId();
             console.log("Contact ID:", cid);
 
-            // Obtén y muestra los atributos del contacto
             var attributeMap = contact.getAttributes();
             console.log("Attributes:", attributeMap);
 
-            // Obtén y muestra el número de teléfono
             if (
               attributeMap["PhoneNumber"] &&
               attributeMap["PhoneNumber"]["value"]
             ) {
-              var phoneNumber = attributeMap["PhoneNumber"]["value"];
-              console.log("Phone Number:", phoneNumber);
-              alert("Phone Number: " + phoneNumber);
+              contactPhoneNumber = attributeMap["PhoneNumber"]["value"];
+              console.log("Phone Number:", contactPhoneNumber);
+              alert("Phone Number: " + contactPhoneNumber);
             } else {
               console.log("Phone number attribute not found.");
             }
 
             console.log("**********************************************");
+
+            sendData(); // Intenta enviar datos después de obtener el phone number
           });
         });
       }
